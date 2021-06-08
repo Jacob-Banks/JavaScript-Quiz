@@ -1,0 +1,28 @@
+.header-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+#high {
+  color: purple;
+  font-weight: lighter;
+  font-size: 3vw;
+}
+.quiz {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.header {
+  text-align: left;
+}
+li {
+  padding: 8px 20px;
+  background-color: darkblue;
+}
+.btn {
+  color: white;
+  background-color: darkblue;
+  padding: 10px 10px;
+}
