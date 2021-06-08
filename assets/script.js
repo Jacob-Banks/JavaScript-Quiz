@@ -45,7 +45,17 @@ let answers = [
     ["tuuuuuuuuuuuuuuuuuuuuuwwwwwwww", "right"],
   ],
 ];
-function startQuiz() {
+function startQuiz(myArray) {
+  for (var i = 0; i < myArray.length; i++) {
+    k = myArray[i].length;
+    while (k--) {
+      j = Math.floor(Math.random() * (myArray.length - 1));
+      tempk = myArray[i][k];
+      tempj = myArray[i][j];
+      myArray[i][k] = tempj;
+      myArray[i][j] = tempk;
+    }
+  }
   document.getElementById("btn").style.display = "none";
   document.getElementById("sub").style.display = "none";
   timerScore();
@@ -199,9 +209,6 @@ function createForm() {
   wtf.addEventListener("click", () => addEntry());
 }
 
-start.addEventListener("click", () => startQuiz());
-high.addEventListener("click", () => highScores());
-
 function addEntry() {
   // Parse the JSON stored in allEntriesP
   var testScores = JSON.parse(localStorage.getItem("testScores"));
@@ -215,3 +222,6 @@ function addEntry() {
   localStorage.setItem("testScores", JSON.stringify(testScores));
   highScores();
 }
+
+start.addEventListener("click", () => startQuiz(answers));
+high.addEventListener("click", () => highScores());
