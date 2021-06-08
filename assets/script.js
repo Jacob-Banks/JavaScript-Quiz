@@ -1,8 +1,8 @@
 let timer = 100;
-let btn = document.getElementById("btn");
+let score = "e";
+let start = document.getElementById("btn");
 let quiz = document.getElementById("quiz");
-var retrievedScores = localStorage.getItem("testScores");
-let testScores = ["33, jjmb", "93, jjmb", "73, jjmb"];
+let testScores = [];
 let high = document.getElementById("high");
 let index = 0;
 
@@ -69,7 +69,7 @@ function nextquestion(li) {
 }
 
 function timerScore() {
-  var score = setInterval(function () {
+  score = setInterval(function () {
     if (timer <= 0) {
       clearInterval(score);
       document.getElementById("timer").innerHTML = "Failed";
@@ -84,6 +84,7 @@ function exit() {
   document.getElementById("Ol").style.display = "none";
   document.getElementById("sub").style.display = "block";
   document.getElementById("sub").innerHTML = `Your score is ${timer}`;
+  clearInterval(score);
   document.getElementById("timer").style.display = "none";
   createForm();
 }
@@ -103,8 +104,6 @@ function resetBorder() {
   quiz.style.border = "none";
   document.getElementById("arr").style.display = "none";
 }
-
-// Retrieve the object from storage
 
 function createOl() {
   const x = document.createElement("OL");
@@ -142,30 +141,6 @@ function createOl() {
   list4.addEventListener("click", () => nextquestion(3));
 }
 
-function createForm() {
-  const x = document.createElement("form");
-  x.setAttribute("id", "form");
-  quiz.appendChild(x);
-
-  const y = document.createElement("input");
-  y.setAttribute("type", "text");
-  y.setAttribute("id", "formInput");
-  document.getElementById("form").appendChild(y);
-
-  const button = document.createElement("input");
-  button.setAttribute("type", "submit");
-  button.setAttribute("id", "formButton");
-  button.setAttribute("class", "btn");
-  button.style.padding = "4px 10px";
-  button.style.margin = "0 10px";
-  document.getElementById("form").appendChild(button);
-
-  let text = document.createTextNode("submit");
-  document.getElementById("formButton").appendChild(text);
-  let form = document.getElementById("form");
-  form.addEventListener("submit", logSubmit);
-}
-
 function highScores() {
   document.getElementById("form").style.display = "none";
   document.getElementById("btn").style.display = "none";
@@ -176,6 +151,8 @@ function highScores() {
   document.getElementById("sub").style.display = "none";
   document.getElementById("what").innerHTML = "High Scores";
 
+  var testScores = JSON.parse(localStorage.getItem("testScores"));
+  if (testScores == null) testScores = [];
   const x = document.createElement("OL");
   x.setAttribute("id", "Ol2");
   quiz.appendChild(x);
@@ -197,9 +174,44 @@ function highScores() {
     .addEventListener("click", () => location.reload());
 }
 
-function logSubmit(event) {
-  highScores();
-  event.preventDefault();
+function createForm() {
+  const x = document.createElement("form");
+  x.setAttribute("id", "form");
+  quiz.appendChild(x);
+
+  const y = document.createElement("input");
+  y.setAttribute("type", "text");
+  y.setAttribute("id", "formInput");
+  y.setAttribute("placeholder", "asdf");
+  document.getElementById("form").appendChild(y);
+
+  const button = document.createElement("button");
+
+  button.setAttribute("id", "formButton");
+  button.setAttribute("class", "btn");
+  button.setAttribute("type", "button");
+  document.getElementById("form").appendChild(button);
+
+  let text = document.createTextNode("submit");
+  document.getElementById("formButton").appendChild(text);
+
+  let wtf = document.querySelector("#formButton");
+  wtf.addEventListener("click", () => addEntry());
 }
-btn.addEventListener("click", () => startQuiz());
+
+start.addEventListener("click", () => startQuiz());
 high.addEventListener("click", () => highScores());
+
+function addEntry() {
+  // Parse the JSON stored in allEntriesP
+  var testScores = JSON.parse(localStorage.getItem("testScores"));
+  if (testScores == null) testScores = [];
+  var value = document.getElementById("formInput").value;
+  scoreValue = ` ${timer}` + "  " + `${value} `;
+
+  localStorage.setItem("scoreValue", JSON.stringify(scoreValue));
+  // Save allEntries back to local storage
+  testScores.push(scoreValue);
+  localStorage.setItem("testScores", JSON.stringify(testScores));
+  highScores();
+}
