@@ -19,7 +19,13 @@
 }
 li {
   padding: 8px 20px;
+  color: aliceblue;
   background-color: darkblue;
+  margin-bottom: 15px;
+}
+#arr {
+  color: grey;
+  border-top: 1px solid grey;
 }
 .btn {
   color: white;
