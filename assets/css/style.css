@@ -1,34 +1,53 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 .header-container {
   display: flex;
   justify-content: space-between;
+  margin: 2vw 5vw;
 }
 
 #high {
-  color: purple;
+  color: #eab0ff;
   font-weight: lighter;
-  font-size: 3vw;
+  font-size: 2vw;
 }
 .quiz {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  margin: 5vw 15vw;
+  align-items: flex-start;
   flex-direction: column;
+
+  padding-bottom: 5vw;
 }
 .header {
-  text-align: left;
+  display: flex;
+  align-items: center;
+  margin: 0 0 15px 0;
+  text-align: center;
 }
-li {
-  padding: 8px 20px;
-  color: aliceblue;
-  background-color: darkblue;
-  margin-bottom: 15px;
-}
+
 #arr {
   color: grey;
-  border-top: 1px solid grey;
+  margin-left: 15.3vw;
 }
 .btn {
   color: white;
   background-color: darkblue;
   padding: 10px 10px;
+  margin-bottom: 10px;
+  border-radius: 7px;
+}
+.btn:hover {
+  background-color: #eab0ff;
+}
+
+#Ol {
+  list-style-type: none;
+}
+#form::before {
+  content: "Enter your initials : ";
 }
