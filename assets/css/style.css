@@ -13,7 +13,7 @@
 #high {
   color: #eab0ff;
   font-weight: lighter;
-  font-size: 2vw;
+  font-size: 12px;
 }
 .quiz {
   display: flex;
@@ -30,7 +30,7 @@
   text-align: center;
 }
 
-#arr {
+#result {
   color: grey;
   margin-left: 15.3vw;
 }

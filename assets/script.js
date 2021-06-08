@@ -46,6 +46,7 @@ let answers = [
   ],
 ];
 function startQuiz(myArray) {
+  //randomize answer order
   for (var i = 0; i < myArray.length; i++) {
     k = myArray[i].length;
     while (k--) {
@@ -56,29 +57,40 @@ function startQuiz(myArray) {
       myArray[i][j] = tempk;
     }
   }
+  //hide unsed elements
   document.getElementById("btn").style.display = "none";
   document.getElementById("sub").style.display = "none";
+
+  //start the timer
   timerScore();
-  document.getElementById("what").innerHTML = questions[index];
+  //display the question
+  document.getElementById("headline").innerHTML = questions[index];
+  //display the possible answers
   createOl();
+  //increase counter
   index++;
 }
 
 function nextquestion(li) {
+  //add result of last question
   setBorder(li);
+  //exit if questions are done
   if (index > answers.length - 1) {
     exit();
   } else {
-    document.getElementById("what").innerHTML = questions[index];
+    //display new question and possible anwsers
+    document.getElementById("headline").innerHTML = questions[index];
     document.getElementById("li0").innerHTML = `1. ${answers[index][0][0]}`;
     document.getElementById("li1").innerHTML = `2. ${answers[index][1][0]}`;
     document.getElementById("li2").innerHTML = `3. ${answers[index][2][0]}`;
     document.getElementById("li3").innerHTML = `4. ${answers[index][3][0]}`;
   }
+  //increse counter
   index++;
 }
 
 function timerScore() {
+  //time countdown
   score = setInterval(function () {
     if (timer <= 0) {
       clearInterval(score);
@@ -89,37 +101,51 @@ function timerScore() {
     timer -= 1;
   }, 1000);
 }
+
 function exit() {
-  document.getElementById("what").innerHTML = "All done";
+  // change headline
+  document.getElementById("headline").innerHTML = "All done";
+  //hide unsued elements
   document.getElementById("Ol").style.display = "none";
+  // display user score
   document.getElementById("sub").style.display = "block";
   document.getElementById("sub").innerHTML = `Your score is ${timer}`;
+
+  // stop timer
   clearInterval(score);
+
+  //removes timer
   document.getElementById("timer").style.display = "none";
+
+  //add submit initials and score form
   createForm();
 }
 
+// sets border adds wheter previous q was right or wrong subtracts score for wrong entry
 function setBorder(li) {
   quiz.style.borderBottom = "solid grey 1px";
-  document.getElementById("arr").style.display = "block";
+  document.getElementById("result").style.display = "block";
   if (answers[index - 1][li][1] === "right") {
-    document.getElementById("arr").innerHTML = "correct";
+    document.getElementById("result").innerHTML = "correct";
   } else {
-    document.getElementById("arr").innerHTML = "wrong";
+    document.getElementById("result").innerHTML = "wrong";
     timer = timer - 10;
   }
 }
 
+//removes border
 function resetBorder() {
   quiz.style.border = "none";
-  document.getElementById("arr").style.display = "none";
+  document.getElementById("result").style.display = "none";
 }
 
 function createOl() {
+  //create ol to display answers
   const x = document.createElement("OL");
   x.setAttribute("id", "Ol");
   quiz.appendChild(x);
 
+  // fill the list from ansewrs array
   for (i = 0; i < answers[0].length; i++) {
     const li = document.createElement("li");
     li.setAttribute("id", `li${i}`);
@@ -128,23 +154,26 @@ function createOl() {
     li.appendChild(text);
     document.getElementById("Ol").appendChild(li);
   }
-
+  // create the right/wrong notifyer container
   const para = document.createElement("p");
   const body = document.body;
-  para.setAttribute("id", `arr`);
+  para.setAttribute("id", `result`);
   body.appendChild(para);
 
+  // add event listener idetifiers for li
   let list1 = document.querySelector("#li0");
   let list2 = document.querySelector("#li1");
   let list3 = document.querySelector("#li2");
   let list4 = document.querySelector("#li3");
+  // identifier on all list items for border removal
   const border = document.querySelectorAll(".btn");
-
+  //remove border on mouse over
   border.forEach((el) =>
     el.addEventListener("mouseover", (event) => {
       resetBorder();
     })
   );
+  // add listeners for which li was clicked launch neext question
   list1.addEventListener("click", () => nextquestion(0));
   list2.addEventListener("click", () => nextquestion(1));
   list3.addEventListener("click", () => nextquestion(2));
@@ -152,25 +181,37 @@ function createOl() {
 }
 
 function highScores() {
-  document.getElementById("form").style.display = "none";
-  document.getElementById("btn").style.display = "none";
+  //get rid of submit score form
+  if (index > 5) {
+    document.getElementById("form").style.display = "none";
+    document.getElementById("btn").style.display = "none";
+  }
+  // get rid of answer ol
   if (index > 0) {
     document.getElementById("Ol").style.display = "none";
     resetBorder();
   }
+  //get rid of subtitle
   document.getElementById("sub").style.display = "none";
-  document.getElementById("what").innerHTML = "High Scores";
 
+  //set the new headline
+  document.getElementById("headline").innerHTML = "High Scores";
+
+  // get the saved high scores
   var testScores = JSON.parse(localStorage.getItem("testScores"));
   if (testScores == null) testScores = [];
+
+  // create a list that displays high scores
   const x = document.createElement("OL");
   x.setAttribute("id", "Ol2");
   quiz.appendChild(x);
-  var tml = "";
+  var aScore = "";
   for (var i = 0; i < testScores.length; i++) {
-    tml += "<li>" + testScores[i] + "</li>";
+    aScore += "<li>" + testScores[i] + "</li>";
   }
-  document.getElementById("Ol2").innerHTML = tml;
+  document.getElementById("Ol2").innerHTML = aScore;
+
+  // create start again button
   const button = document.createElement("button");
   button.setAttribute("type", "submit");
   button.setAttribute("id", "highButton1");
@@ -179,22 +220,27 @@ function highScores() {
 
   let text = document.createTextNode("Go Back");
   document.getElementById("highButton1").appendChild(text);
+
+  // make go back button refresh page
   document
     .getElementById("highButton1")
     .addEventListener("click", () => location.reload());
 }
 
 function createForm() {
+  //creat the form
   const x = document.createElement("form");
   x.setAttribute("id", "form");
   quiz.appendChild(x);
 
+  // add input field
   const y = document.createElement("input");
   y.setAttribute("type", "text");
   y.setAttribute("id", "formInput");
   y.setAttribute("placeholder", "asdf");
   document.getElementById("form").appendChild(y);
 
+  //add a submit button
   const button = document.createElement("button");
 
   button.setAttribute("id", "formButton");
@@ -205,21 +251,24 @@ function createForm() {
   let text = document.createTextNode("submit");
   document.getElementById("formButton").appendChild(text);
 
+  // make button to launch add entry which fills highscores and adds this entry
   let wtf = document.querySelector("#formButton");
   wtf.addEventListener("click", () => addEntry());
 }
 
 function addEntry() {
-  // Parse the JSON stored in allEntriesP
+  // get previous scores
   var testScores = JSON.parse(localStorage.getItem("testScores"));
   if (testScores == null) testScores = [];
+  //set the current score and user
   var value = document.getElementById("formInput").value;
   scoreValue = ` ${timer}` + "  " + `${value} `;
-
+  // Save  back to local storage
   localStorage.setItem("scoreValue", JSON.stringify(scoreValue));
-  // Save allEntries back to local storage
+  // place score in high score array
   testScores.push(scoreValue);
   localStorage.setItem("testScores", JSON.stringify(testScores));
+  //launch high score page
   highScores();
 }
 
