@@ -20,8 +20,7 @@
   margin: 5vw 15vw;
   align-items: flex-start;
   flex-direction: column;
-
-  padding-bottom: 5vw;
+  padding-bottom: 2vw;
 }
 .header {
   display: flex;
@@ -50,4 +49,11 @@
 }
 #form::before {
   content: "Enter your initials : ";
+}
+#Ol2 li {
+  background-color: lightgray;
+  width: 55vw;
+  text-align: left;
+  margin-bottom: 10px;
+  padding-left: 10px;
 }

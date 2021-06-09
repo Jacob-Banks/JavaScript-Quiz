@@ -1,5 +1,5 @@
-let timer = 100;
-let score = "e";
+let timer = 99;
+let score = "";
 let start = document.getElementById("btn");
 let quiz = document.getElementById("quiz");
 let testScores = [];
@@ -225,6 +225,22 @@ function highScores() {
   document
     .getElementById("highButton1")
     .addEventListener("click", () => location.reload());
+
+  // create clear highscore button
+  const buttonB = document.createElement("button");
+  buttonB.setAttribute("type", "submit");
+  buttonB.setAttribute("id", "highButton2");
+  buttonB.setAttribute("class", "btn");
+  buttonB.style.marginLeft = "10px";
+  document.getElementById("Ol2").appendChild(buttonB);
+
+  let textB = document.createTextNode("Clear High Scores");
+  document.getElementById("highButton2").appendChild(textB);
+
+  // make clear scores
+  document
+    .getElementById("highButton2")
+    .addEventListener("click", () => clearHigh());
 }
 
 function createForm() {
@@ -262,13 +278,17 @@ function addEntry() {
   if (testScores == null) testScores = [];
   //set the current score and user
   var value = document.getElementById("formInput").value;
-  scoreValue = ` ${timer}` + "  " + `${value} `;
+  scoreValue = ` ${timer}` + "____" + `${value} `;
   // Save  back to local storage
   localStorage.setItem("scoreValue", JSON.stringify(scoreValue));
   // place score in high score array
   testScores.push(scoreValue);
   localStorage.setItem("testScores", JSON.stringify(testScores));
   //launch high score page
+  highScores();
+}
+function clearHigh() {
+  window.localStorage.clear();
   highScores();
 }
 
