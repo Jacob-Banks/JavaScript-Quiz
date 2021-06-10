@@ -157,6 +157,7 @@ function setBorder(li) {
     document.getElementById("result").innerHTML = "Wrong ;(";
     timer = timer - 10;
   }
+  play(li); //sound evv
 }
 
 //removes border and previous result on mouse over li
@@ -268,6 +269,15 @@ function highScores() {
 function clearHigh() {
   window.localStorage.clear();
   highScores();
+}
+function play(li) {
+  if (answers[index - 1][li][1] === "right") {
+    var audio = new Audio("./assets/correct.mp3");
+    audio.play();
+  } else {
+    var audio = new Audio("./assets/error.wav");
+    audio.play();
+  }
 }
 
 // start call to action
