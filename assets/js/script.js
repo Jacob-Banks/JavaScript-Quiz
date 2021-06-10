@@ -83,12 +83,12 @@ function startQuiz(myArray) {
   //display the question
   document.getElementById("headline").innerHTML = questions[index];
   //display the possible answers
-  createOl();
+  createAnswers();
   //increase counter
   index++;
 }
 
-function createOl() {
+function createAnswers() {
   //create ol to display answers
   const x = document.createElement("OL");
   x.setAttribute("id", "Ol");
@@ -248,34 +248,16 @@ function addScore() {
   // send scores to storage
   localStorage.setItem("testScores", JSON.stringify(testScores));
 
-  //fill high score page
+  //launch high score page
   newpage();
 }
-
-function highScores() {
-  // get the saved high scores
-  testScores = JSON.parse(localStorage.getItem("testScores"));
-  if (testScores == null) testScores = [];
-
-  //create and add li(s)aka scores
-  let aScore = "";
-  for (let i = 0; i < testScores.length; i++) {
-    aScore += "<li>" + testScores[i][0] + " " + testScores[i][1] + "</li>";
-  }
-  document.getElementById("order").innerHTML = aScore;
-} //end of highscores
-
-//clears local storage
-function clearHigh() {
-  window.localStorage.clear();
-  highScores();
-}
+//play right/wrong soundfx
 function play(li) {
   if (answers[index - 1][li][1] === "right") {
-    var audio = new Audio("./assets/correct.mp3");
+    var audio = new Audio("./assets/sounds/correct.mp3");
     audio.play();
   } else {
-    var audio = new Audio("./assets/error.wav");
+    var audio = new Audio("./assets/sounds/error.wav");
     audio.play();
   }
 }
