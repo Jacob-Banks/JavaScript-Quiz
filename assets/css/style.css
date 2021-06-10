@@ -50,10 +50,22 @@
 #form::before {
   content: "Enter your initials : ";
 }
-#Ol2 li {
+.high {
+  margin-bottom: 25px;
+  text-align: center;
+}
+.order li {
   background-color: lightgray;
   width: 55vw;
   text-align: left;
   margin-bottom: 10px;
   padding-left: 10px;
+}
+.buttons {
+  display: flex;
+  margin-right: 15px;
+}
+
+.buttons button {
+  margin-right: 15px;
 }

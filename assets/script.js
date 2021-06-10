@@ -1,6 +1,6 @@
-let start = document.getElementById("btn");
-let quiz = document.getElementById("quiz");
-let high = document.getElementById("high");
+const start = document.getElementById("btn");
+const quiz = document.getElementById("quiz");
+const high = document.getElementById("high");
 let index = 0; //which question
 let timer = 99;
 let score = "";
@@ -53,7 +53,7 @@ function timerScore() {
     if (timer <= 0) {
       clearInterval(score);
       document.getElementById("timer").innerHTML = "Failed";
-      highScores();
+      newpage();
     } else {
       // if time is left show time
       document.getElementById("timer").innerHTML = "Score " + timer;
@@ -75,7 +75,7 @@ function startQuiz(myArray) {
     }
   }
   //hide unused elements
-  document.getElementById("btn").style.display = "none";
+  start.style.display = "none";
   document.getElementById("sub").style.display = "none";
 
   //start the timer/score
@@ -192,6 +192,7 @@ function createForm() {
   y.setAttribute("type", "text");
   y.setAttribute("id", "formInput");
   y.setAttribute("placeholder", "asdf");
+  y.setAttribute("maxlength", "5");
   document.getElementById("form").appendChild(y);
 
   //add a submit button
@@ -206,7 +207,7 @@ function createForm() {
 
   // make the button launch add score which fills highscores and adds this entry
   let addInfo = document.querySelector("#formButton");
-  addInfo.addEventListener("click", () => addScore());
+  addInfo.addEventListener("click", () => addScore()); //
 
   //stop  enter key submit
   let form = document.getElementById("form");
@@ -216,13 +217,20 @@ function createForm() {
   form.addEventListener("submit", handleForm);
 } //end of form
 
+function newpage() {
+  location.href = "highscores.html";
+}
+
 function addScore() {
   //get previous scores
   testScores = JSON.parse(localStorage.getItem("testScores"));
   if (testScores == null) testScores = [];
 
   //get  and set current quiz score
-  const user = document.getElementById("formInput").value;
+  let user = document.getElementById("formInput").value;
+  if (user === "") {
+    user = "A Shy Person";
+  }
   const score = timer;
   const scoreValue = [score, user];
 
@@ -239,71 +247,21 @@ function addScore() {
   // send scores to storage
   localStorage.setItem("testScores", JSON.stringify(testScores));
 
-  //launch high score page
-  highScores();
+  //fill high score page
+  newpage();
 }
 
 function highScores() {
-  //set the new headline
-  document.getElementById("headline").innerHTML = "High Scores";
-
   // get the saved high scores
   testScores = JSON.parse(localStorage.getItem("testScores"));
   if (testScores == null) testScores = [];
-
-  // create a list that displays high scores
-  const x = document.createElement("OL");
-  x.setAttribute("id", "Ol2");
-  quiz.appendChild(x);
 
   //create and add li(s)aka scores
   let aScore = "";
   for (let i = 0; i < testScores.length; i++) {
     aScore += "<li>" + testScores[i][0] + " " + testScores[i][1] + "</li>";
   }
-  document.getElementById("Ol2").innerHTML = aScore;
-
-  // create go back button
-  const button = document.createElement("button");
-  button.setAttribute("type", "submit");
-  button.setAttribute("id", "highButton1");
-  button.setAttribute("class", "btn");
-  document.getElementById("Ol2").appendChild(button);
-  let text = document.createTextNode("Go Back");
-  document.getElementById("highButton1").appendChild(text);
-
-  // make go back button refresh page
-  document
-    .getElementById("highButton1")
-    .addEventListener("click", () => location.reload());
-
-  // create clear highscore button
-  const buttonB = document.createElement("button");
-  buttonB.setAttribute("type", "submit");
-  buttonB.setAttribute("id", "highButton2");
-  buttonB.setAttribute("class", "btn");
-  buttonB.style.marginLeft = "10px";
-  document.getElementById("Ol2").appendChild(buttonB);
-  let textB = document.createTextNode("Clear High Scores");
-  document.getElementById("highButton2").appendChild(textB);
-
-  // make  button clear scores
-  document
-    .getElementById("highButton2")
-    .addEventListener("click", () => clearHigh());
-
-  //get rid of submit score form
-  if (index > answers.length) {
-    document.getElementById("form").style.display = "none";
-  }
-  // get rid of answer ol
-  if (index > 0) {
-    document.getElementById("Ol").style.display = "none";
-    resetBorder();
-  }
-  //get rid of subtitle
-  document.getElementById("sub").style.display = "none";
-  document.getElementById("btn").style.display = "none";
+  document.getElementById("order").innerHTML = aScore;
 } //end of highscores
 
 //clears local storage
@@ -315,4 +273,4 @@ function clearHigh() {
 // start call to action
 start.addEventListener("click", () => startQuiz(answers));
 // view high scores call to action
-high.addEventListener("click", () => highScores());
+high.addEventListener("click", () => newpage());
