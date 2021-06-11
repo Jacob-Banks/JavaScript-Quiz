@@ -266,8 +266,12 @@ function play(li) {
     audio.play();
   }
 }
-
+function highScoresLink() {
+  location.href = "highscores.html";
+  testResult = "To take the quiz hit the go back button";
+  localStorage.setItem("testResult", testResult);
+}
 // start call to action
 start.addEventListener("click", () => startQuiz(answers));
 // view high scores call to action
-high.addEventListener("click", () => newpage());
+high.addEventListener("click", () => highScoresLink());

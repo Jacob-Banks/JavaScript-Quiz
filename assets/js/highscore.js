@@ -18,14 +18,14 @@ function highScores() {
 function displayFailed() {
   failed = localStorage.getItem("testResult");
 
-  if (failed === "Sorry you've failed this test") {
-    let text = document.createTextNode(failed);
-    h3.appendChild(text);
-  } else {
+  if (failed === null) {
     let texta = document.createTextNode(
       "You've completed this quiz: check to see if you made the highscores!!!"
     );
     h3.appendChild(texta);
+  } else {
+    let text = document.createTextNode(failed);
+    h3.appendChild(text);
   }
 }
 //clears local storage
