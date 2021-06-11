@@ -5,7 +5,7 @@ let index = 0; //which question
 let timer = 99;
 let score = "";
 let testScores = [];
-
+let testResult = false;
 const questions = [
   "aaaaaaaaaaa",
   "bbbbbbbbbbbb",
@@ -52,7 +52,10 @@ function timerScore() {
     // when time runs out stop the timer go to highsscores
     if (timer <= 0) {
       clearInterval(score);
-      document.getElementById("timer").innerHTML = "Failed";
+      if (testResult === false) {
+        testResult = "Sorry you've failed this test";
+        localStorage.setItem("testResult", testResult);
+      }
       newpage();
     } else {
       // if time is left show time
@@ -168,6 +171,7 @@ function resetBorder() {
 
 function exit() {
   // change headline
+  testResult = true;
   document.getElementById("headline").innerHTML = "All done!";
   // display user score
   document.getElementById("sub").style.display = "block";
@@ -179,6 +183,7 @@ function exit() {
   document.getElementById("Ol").style.display = "none";
   document.getElementById("timer").style.display = "none";
   // stop timer
+
   clearInterval(score);
 }
 
