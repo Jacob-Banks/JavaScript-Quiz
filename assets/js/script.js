@@ -7,42 +7,42 @@ let score = "";
 let testScores = [];
 let testResult = false;
 const questions = [
-  "aaaaaaaaaaa",
-  "bbbbbbbbbbbb",
-  "ccccccccccc",
-  "ddddddddddd",
-  "eeeeeeeeeeeeee",
+  "Commonly used data types DO NOT include:",
+  "The condition in an if/else statement is enclose with ________",
+  "Arrays in JavaScript can be used to store ________.",
+  "String values must be enclosed within ______ when being assigned to variables",
+  "A very useful tool used during development and debugging for printing content to the debugger is :",
 ];
 let answers = [
   [
-    ["aiiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["biiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["ciiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["duuuuuuuuuuuuuuuuuuuuuwwwwwwww", "right"],
+    ["strings", "wrong"],
+    ["booleans", "wrong"],
+    ["numbers", "wrong"],
+    ["alerts", "right"],
   ],
   [
-    ["eiiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["fiiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["giiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["huuuuuuuuuuuuuuuuuuuuuwwwwwwww", "right"],
+    ["quotes", "wrong"],
+    ["curly brackets", "wrong"],
+    ["square brackets", "wrong"],
+    ["parentheseis", "right"],
   ],
   [
-    ["iiiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["jiiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["kiiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["luuuuuuuuuuuuuuuuuuuuuwwwwwwww", "right"],
+    ["numbers and strings", "wrong"],
+    ["other arrays", "wrong"],
+    ["boolenas", "wrong"],
+    ["all of the above", "right"],
   ],
   [
-    ["piiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["oiiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["niiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["muuuuuuuuuuuuuuuuuuuuuwwwwwwww", "right"],
+    ["commas", "wrong"],
+    ["curly brackets", "wrong"],
+    ["parenthesis", "wrong"],
+    ["quotes", "right"],
   ],
   [
-    ["qiiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["riiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["siiiiiiiiiiiiiiiiiiii", "wrong"],
-    ["tuuuuuuuuuuuuuuuuuuuuuwwwwwwww", "right"],
+    ["JavaScript", "wrong"],
+    ["terminal/bash", "wrong"],
+    ["for loops", "wrong"],
+    ["console.log", "right"],
   ],
 ];
 
