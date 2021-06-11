@@ -77,6 +77,8 @@ function startQuiz(myArray) {
       myArray[i][j] = tempk;
     }
   }
+  //adjust style
+  quiz.style.alignItems = "flex-start";
   //hide unused elements
   start.style.display = "none";
   document.getElementById("sub").style.display = "none";
@@ -210,6 +212,10 @@ function createForm() {
 
   let text = document.createTextNode("submit");
   document.getElementById("formButton").appendChild(text);
+  // move button over
+  button.style.marginLeft = "10px";
+  // make border last q result disappear
+  button.addEventListener("mouseenter", resetBorder());
 
   // make the button launch add score which fills highscores and adds this entry
   let addInfo = document.querySelector("#formButton");

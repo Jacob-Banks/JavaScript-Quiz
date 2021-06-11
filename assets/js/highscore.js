@@ -8,7 +8,14 @@ function highScores() {
   //create and add li(s)aka scores
   let aScore = "";
   for (let i = 0; i < testScores.length; i++) {
-    aScore += "<li>" + testScores[i][0] + " " + testScores[i][1] + "</li>";
+    aScore +=
+      "<li>" +
+      `${i + 1} .` +
+      " " +
+      testScores[i][0] +
+      " " +
+      testScores[i][1] +
+      "</li>";
   }
   document.getElementById("order").innerHTML = aScore;
   displayFailed();

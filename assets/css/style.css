@@ -11,20 +11,19 @@
 }
 
 #high {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: #eab0ff;
   font-weight: lighter;
-  font-size: 12px;
+  font-size: 14px;
 }
 .quiz {
   display: flex;
-  margin: 5vw 15vw;
-  align-items: flex-start;
+  margin: 5vw 15vw 2.5vw 15vw;
+  align-items: center;
   flex-direction: column;
   padding-bottom: 2vw;
 }
 .header {
-  display: flex;
-  align-items: center;
   margin: 0 0 15px 0;
   text-align: center;
 }
@@ -35,6 +34,7 @@
 }
 .btn {
   color: white;
+  font-size: 16px;
   background-color: darkblue;
   padding: 10px 10px;
   margin-bottom: 10px;
@@ -47,6 +47,10 @@
 #Ol {
   list-style-type: none;
 }
+#Ol li {
+  font-size: 16px;
+  font-family: Georgia, "Times New Roman", Times, serif;
+}
 #form::before {
   content: "Enter your initials : ";
 }
@@ -56,6 +60,7 @@
 }
 .order {
   margin-top: 10px;
+  list-style: none;
 }
 .order li {
   background-color: lightgray;
@@ -63,6 +68,9 @@
   text-align: left;
   margin-bottom: 10px;
   padding-left: 10px;
+}
+#formButton {
+  padding: 3px 10px;
 }
 .buttons {
   display: flex;
