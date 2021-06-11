@@ -244,13 +244,13 @@ function addScore() {
     user = "A Shy Person";
   }
   const score = timer;
-  const scoreValue = [score, user];
+  const scoreValue = [user, score];
 
   // place score in high score array
   testScores.push(scoreValue);
   //sort scores
   testScores.sort(function (a, b) {
-    return b[0] - a[0];
+    return b[1] - a[1];
   });
   // limit length
   if (testScores.length > 10) {

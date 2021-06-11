@@ -13,7 +13,7 @@ function highScores() {
       `${i + 1} .` +
       " " +
       testScores[i][0] +
-      " " +
+      ": " +
       testScores[i][1] +
       "</li>";
   }
@@ -26,17 +26,16 @@ function displayFailed() {
   failed = localStorage.getItem("testResult");
 
   if (failed === null) {
-    let texta = document.createTextNode(
-      "You've completed this quiz: check to see if you made the highscores!!!"
-    );
-    h3.appendChild(texta);
+    h3.innerHTML =
+      "You've completed this quiz: check to see if you made the highscores!!!";
   } else {
-    let text = document.createTextNode(failed);
-    h3.appendChild(text);
+    h3.innerHTML = `${failed}`;
   }
 }
 //clears local storage
 function clearHigh() {
   window.localStorage.clear();
+  failed = "To take the quiz click Go Back";
+  localStorage.setItem("testResult", failed);
   highScores();
 }
