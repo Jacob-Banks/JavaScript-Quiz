@@ -27,8 +27,7 @@ function displayresult() {
   result = localStorage.getItem("testResult");
   // if they compleated quiz
   if (result === null) {
-    h3.innerHTML =
-      "You've completed this quiz: check to see if you made the highscores!!!";
+    h3.innerHTML = "You've completed this quiz: did you made the highscores!!!";
   } else {
     //if they result or clicked the link or cleared the scores
     h3.innerHTML = `${result}`;

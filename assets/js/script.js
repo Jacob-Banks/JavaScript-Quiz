@@ -15,7 +15,13 @@ const questions = [
   "Arrays in JavaScript can be used to store ________.",
   "String values must be enclosed within ______ when being assigned to variables",
   "A very useful tool used during development and debugging for printing content to the debugger is :",
+  "Inside which HTML element do we put JavaScript",
+  `What is the correct JavaScript syntax to change the content of the HTML element? <p id=demo>This is a demonstration.</p>`,
+  "How do you write 'Hello World' in an alert box?",
+  "How to write an IF statement in JavaScript?",
+  "How to write an IF statement for executing some code if 'i' is NOT equal to 5?",
 ];
+
 let answers = [
   [
     ["strings", "wrong"],
@@ -36,6 +42,12 @@ let answers = [
     ["all of the above", "right"],
   ],
   [
+    ["scripting", "wrong"],
+    ["script", "right"],
+    ["javascript", "wrong"],
+    ["js", "wrong"],
+  ],
+  [
     ["commas", "wrong"],
     ["curly brackets", "wrong"],
     ["parenthesis", "wrong"],
@@ -47,6 +59,33 @@ let answers = [
     ["for loops", "wrong"],
     ["console.log", "right"],
   ],
+
+  //from w3schools quiz https://www.w3schools.com/js/js_quiz.asp
+
+  // [
+  //   [`document.getElementById('demo').innetHTML='Hello World';`, "right"],
+  //   [`document.getElementByName('p').innerHTML='Hello World!';`, "wrong"],
+  //   [`#demo.innerHTML='Hello World!';`, "wrong"],
+  //   [`document.getElement('p').innerHTML='Hello World!';`, "wrong"],
+  // ],
+  // [
+  //   [`alertBox('Hello World');`, "wrong"],
+  //   [`alert('Hello World');`, "right"],
+  //   [`msg('Hello World');`, "wrong"],
+  //   [`msgBox('Hello World');`, "wrong"],
+  // ],
+  // [
+  //   ["if(i==5)", "right"],
+  //   ["if i = 5 then", "wrong"],
+  //   ["if i = 5", "wrong"],
+  //   ["if i == 5 then", "wrong"],
+  // ],
+  // [
+  //   ["if i <> 5)", "wrong"],
+  //   ["if i =! 5 then", "wrong"],
+  //   ["if (i <> 5)", "wrong"],
+  //   ["if (i!=5)", "right"],
+  // ],
 ];
 
 function timerScore() {
@@ -93,6 +132,8 @@ function startQuiz(myArray) {
   timerScore();
   //display the question
   headline.innerHTML = questions[index];
+  headline.style.textAlign = "left";
+  quiz.style.margin = "10vh 70px";
   //display the possible answers
   createAnswers();
   //increase counter
