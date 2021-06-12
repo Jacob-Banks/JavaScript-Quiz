@@ -43,6 +43,12 @@ let answers = [
   ],
 
   [
+    ["scripting", "wrong"],
+    ["script", "right"],
+    ["javascript", "wrong"],
+    ["js", "wrong"],
+  ],
+  [
     ["commas", "wrong"],
     ["curly brackets", "wrong"],
     ["parenthesis", "wrong"],
