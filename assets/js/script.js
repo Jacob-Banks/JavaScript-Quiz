@@ -1,11 +1,14 @@
 const start = document.getElementById("btn");
 const quiz = document.getElementById("quiz");
 const high = document.getElementById("high");
+const headline = document.getElementById("headline");
+const sub = document.getElementById("sub");
 let index = 0; //which question
 let timer = 99;
 let score = "";
 let testScores = [];
 let testResult = false;
+
 const questions = [
   "Commonly used data types DO NOT include:",
   "The condition in an if/else statement is enclose with ________",
@@ -53,13 +56,14 @@ function timerScore() {
     if (timer <= 0) {
       clearInterval(score);
       if (testResult === false) {
+        // fill the result h3 on high.html
         testResult = "Sorry you've failed this test";
         localStorage.setItem("testResult", testResult);
       }
-      newpage();
+      newpage(); //goto high.html
     } else {
       // if time is left show time
-      document.getElementById("timer").innerHTML = "Score " + timer;
+      document.getElementById("timer").innerHTML = "Time " + timer;
     }
     timer -= 1; // deduct time
   }, 1000); // every second
@@ -68,6 +72,10 @@ function timerScore() {
 function startQuiz(myArray) {
   //randomize answer order
   for (var i = 0; i < myArray.length; i++) {
+    if (i == 2) {
+      //skip  question 3: the answer is all of the above...
+      i++;
+    }
     k = myArray[i].length;
     while (k--) {
       j = Math.floor(Math.random() * (myArray.length - 1));
@@ -77,16 +85,14 @@ function startQuiz(myArray) {
       myArray[i][j] = tempk;
     }
   }
-  //adjust style
-  quiz.style.alignItems = "flex-start";
   //hide unused elements
   start.style.display = "none";
-  document.getElementById("sub").style.display = "none";
+  sub.style.display = "none";
 
   //start the timer/score
   timerScore();
   //display the question
-  document.getElementById("headline").innerHTML = questions[index];
+  headline.innerHTML = questions[index];
   //display the possible answers
   createAnswers();
   //increase counter
@@ -94,6 +100,9 @@ function startQuiz(myArray) {
 }
 
 function createAnswers() {
+  //adjust style from centered to left
+  quiz.style.alignItems = "flex-start";
+
   //create ol to display answers
   const x = document.createElement("OL");
   x.setAttribute("id", "Ol");
@@ -104,6 +113,7 @@ function createAnswers() {
     const li = document.createElement("li");
     li.setAttribute("id", `li${i}`);
     li.setAttribute("class", "btn");
+    //fill the li with a answer
     let text = document.createTextNode(`${i + 1}. ${answers[0][i][0]}`);
     li.appendChild(text);
     document.getElementById("Ol").appendChild(li);
@@ -120,12 +130,12 @@ function createAnswers() {
   let list3 = document.querySelector("#li2");
   let list4 = document.querySelector("#li3");
 
-  // identifier on all list items for border removal
+  // identifier on all list items
   const border = document.querySelectorAll(".btn");
   //remove border and previous result on mouse over
   border.forEach((el) =>
     el.addEventListener("mouseover", (event) => {
-      resetBorder();
+      removeResult();
     })
   );
   // add listeners for which li was clicked, launch neext question pass which li
@@ -137,13 +147,13 @@ function createAnswers() {
 
 function nextquestion(li) {
   //add result of last question
-  setBorder(li);
+  setResult(li);
   //exit if questions are done
   if (index > answers.length - 1) {
     exit();
   } else {
     //display new question and possible anwsers
-    document.getElementById("headline").innerHTML = questions[index];
+    headline.innerHTML = questions[index];
     document.getElementById("li0").innerHTML = `1. ${answers[index][0][0]}`;
     document.getElementById("li1").innerHTML = `2. ${answers[index][1][0]}`;
     document.getElementById("li2").innerHTML = `3. ${answers[index][2][0]}`;
@@ -153,7 +163,7 @@ function nextquestion(li) {
   index++;
 }
 // sets border adds whether previous q was right or wrong subtracts score for wrong entry
-function setBorder(li) {
+function setResult(li) {
   quiz.style.borderBottom = "solid grey 1px";
   document.getElementById("result").style.display = "block";
   if (answers[index - 1][li][1] === "right") {
@@ -162,22 +172,23 @@ function setBorder(li) {
     document.getElementById("result").innerHTML = "Wrong ;(";
     timer = timer - 10;
   }
-  play(li); //sound evv
+  play(li); //sound fx
 }
 
 //removes border and previous result on mouse over li
-function resetBorder() {
+function removeResult() {
   quiz.style.border = "none";
   document.getElementById("result").style.display = "none";
 }
 
 function exit() {
-  // change headline
+  //user finished quiz
   testResult = true;
-  document.getElementById("headline").innerHTML = "All done!";
+  // change headline
+  headline.innerHTML = "All done!";
   // display user score
-  document.getElementById("sub").style.display = "block";
-  document.getElementById("sub").innerHTML = `Your score is ${timer}`;
+  sub.style.display = "block";
+  sub.innerHTML = `Your score is ${timer}`;
   //add submit initials and score form
   createForm();
 
@@ -185,7 +196,6 @@ function exit() {
   document.getElementById("Ol").style.display = "none";
   document.getElementById("timer").style.display = "none";
   // stop timer
-
   clearInterval(score);
 }
 
@@ -214,12 +224,11 @@ function createForm() {
   document.getElementById("formButton").appendChild(text);
   // move button over
   button.style.marginLeft = "10px";
-  // make border last q result disappear
-  button.addEventListener("mouseenter", resetBorder());
 
+  //  last q removeresult on mousenter
+  button.addEventListener("mouseenter", removeResult());
   // make the button launch add score which fills highscores and adds this entry
-  let addInfo = document.querySelector("#formButton");
-  addInfo.addEventListener("click", () => addScore()); //
+  button.addEventListener("click", () => addScore()); //
 
   //stop  enter key submit
   let form = document.getElementById("form");
@@ -229,16 +238,12 @@ function createForm() {
   form.addEventListener("submit", handleForm);
 } //end of form
 
-function newpage() {
-  location.href = "highscores.html";
-}
-
 function addScore() {
   //get previous scores
   testScores = JSON.parse(localStorage.getItem("testScores"));
   if (testScores == null) testScores = [];
 
-  //get  and set current quiz score
+  //get  and set current quiz score and user
   let user = document.getElementById("formInput").value;
   if (user === "") {
     user = "A Shy Person";
@@ -262,6 +267,11 @@ function addScore() {
   //launch high score page
   newpage();
 }
+
+function newpage() {
+  location.href = "highscores.html";
+}
+
 //play right/wrong soundfx
 function play(li) {
   if (answers[index - 1][li][1] === "right") {
@@ -273,8 +283,8 @@ function play(li) {
   }
 }
 function highScoresLink() {
-  location.href = "highscores.html";
-  testResult = "To take the quiz hit the go back button";
+  newpage();
+  testResult = "To take the quiz click the go back button";
   localStorage.setItem("testResult", testResult);
 }
 // start call to action

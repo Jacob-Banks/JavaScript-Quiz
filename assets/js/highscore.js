@@ -1,5 +1,6 @@
-let failed = "";
+let result = "";
 let h3 = document.getElementById("h3");
+
 function highScores() {
   // get the saved high scores
   testScores = JSON.parse(localStorage.getItem("testScores"));
@@ -18,24 +19,25 @@ function highScores() {
       "</li>";
   }
   document.getElementById("order").innerHTML = aScore;
-  displayFailed();
+  displayresult();
   localStorage.removeItem("testResult");
 } //end of highscores
 
-function displayFailed() {
-  failed = localStorage.getItem("testResult");
-
-  if (failed === null) {
+function displayresult() {
+  result = localStorage.getItem("testResult");
+  // if they compleated quiz
+  if (result === null) {
     h3.innerHTML =
       "You've completed this quiz: check to see if you made the highscores!!!";
   } else {
-    h3.innerHTML = `${failed}`;
+    //if they result or clicked the link or cleared the scores
+    h3.innerHTML = `${result}`;
   }
 }
 //clears local storage
 function clearHigh() {
   window.localStorage.clear();
-  failed = "To take the quiz click Go Back";
-  localStorage.setItem("testResult", failed);
+  result = "To take the quiz click Go Back";
+  localStorage.setItem("testResult", result);
   highScores();
 }
