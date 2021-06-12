@@ -15,7 +15,13 @@ const questions = [
   "Arrays in JavaScript can be used to store ________.",
   "String values must be enclosed within ______ when being assigned to variables",
   "A very useful tool used during development and debugging for printing content to the debugger is :",
+  "Inside which HTML element do we put JavaScript",
+  "What is the correct JavaScript syntax to change the content of the HTML element?",
+  "How do you write 'Hello World' in an alert box?",
+  "How to write an IF statement in JavaScript?",
+  "How to write an IF statement for executing some code if 'i' is NOT equal to 5?",
 ];
+
 let answers = [
   [
     ["strings", "wrong"],
@@ -35,6 +41,7 @@ let answers = [
     ["boolenas", "wrong"],
     ["all of the above", "right"],
   ],
+
   [
     ["commas", "wrong"],
     ["curly brackets", "wrong"],
@@ -46,6 +53,38 @@ let answers = [
     ["terminal/bash", "wrong"],
     ["for loops", "wrong"],
     ["console.log", "right"],
+  ],
+
+  //from w3schools quiz https://www.w3schools.com/js/js_quiz.asp
+  [
+    ["scripting", "wrong"],
+    ["script", "right"],
+    ["javascript", "wrong"],
+    ["js", "wrong"],
+  ],
+  [
+    [`document.getElementById('demo').innetHTML='Hello World';`, "right"],
+    [`document.getElementByName('p').innerHTML='Hello World!';`, "wrong"],
+    [`#demo.innerHTML='Hello World!';`, "wrong"],
+    [`document.getElement('p').innerHTML='Hello World!';`, "wrong"],
+  ],
+  [
+    [`alertBox('Hello World');`, "wrong"],
+    [`alert('Hello World');`, "right"],
+    [`msg('Hello World');`, "wrong"],
+    [`msgBox('Hello World');`, "wrong"],
+  ],
+  [
+    ["if(i==5)", "right"],
+    ["if i = 5 then", "wrong"],
+    ["if i = 5", "wrong"],
+    ["if i == 5 then", "wrong"],
+  ],
+  [
+    ["if i <> 5)", "wrong"],
+    ["if i =! 5 then", "wrong"],
+    ["if (i <> 5)", "wrong"],
+    ["if (i!=5)", "right"],
   ],
 ];
 
@@ -69,20 +108,20 @@ function timerScore() {
   }, 1000); // every second
 }
 
-function startQuiz(myArray) {
+function startQuiz() {
   //randomize answer order
-  for (var i = 0; i < myArray.length; i++) {
+  for (var i = 0; i < answers.length; i++) {
     if (i == 2) {
       //skip  question 3: the answer is all of the above...
       i++;
     }
-    k = myArray[i].length;
+    k = answers[i].length;
     while (k--) {
-      j = Math.floor(Math.random() * (myArray.length - 1));
-      tempk = myArray[i][k];
-      tempj = myArray[i][j];
-      myArray[i][k] = tempj;
-      myArray[i][j] = tempk;
+      j = Math.floor(Math.random() * answers[i].length);
+      tempk = answers[i][k];
+      tempj = answers[i][j];
+      answers[i][k] = tempj;
+      answers[i][j] = tempk;
     }
   }
   //hide unused elements
@@ -93,6 +132,8 @@ function startQuiz(myArray) {
   timerScore();
   //display the question
   headline.innerHTML = questions[index];
+  headline.style.textAlign = "left";
+  quiz.style.margin = "10vh 70px 10px 70px";
   //display the possible answers
   createAnswers();
   //increase counter
@@ -120,9 +161,9 @@ function createAnswers() {
   }
   // create the right/wrong notifier container
   const para = document.createElement("p");
-  const body = document.body;
+  const main = document.getElementById("main");
   para.setAttribute("id", `result`);
-  body.appendChild(para);
+  main.appendChild(para);
 
   // add event listener idetifiers for li
   let list1 = document.querySelector("#li0");
@@ -288,6 +329,6 @@ function highScoresLink() {
   localStorage.setItem("testResult", testResult);
 }
 // start call to action
-start.addEventListener("click", () => startQuiz(answers));
+start.addEventListener("click", () => startQuiz());
 // view high scores call to action
 high.addEventListener("click", () => highScoresLink());

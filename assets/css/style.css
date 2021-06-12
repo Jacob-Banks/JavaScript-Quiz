@@ -3,47 +3,55 @@
   padding: 0;
   margin: 0;
 }
-
+/* limit width for the entire page */
+.main {
+  margin: auto;
+  max-width: 800px;
+}
+/* highscore link and timer/score */
 .header-container {
   display: flex;
-  justify-content: space-between;
-  margin: 2vw 5vw;
+  justify-content: space-around;
+  margin: 15px 15px;
 }
-
+/* highscore link */
 #high {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   color: #eab0ff;
   font-weight: lighter;
   font-size: 14px;
 }
+/* quiz container */
 .quiz {
   display: flex;
-  margin: 5vw 15vw 2.5vw 15vw;
+  margin: 10vh 20px 10px 20px;
   align-items: center;
   flex-direction: column;
-  padding-bottom: 2vw;
 }
 .header {
   margin: 0 0 15px 0;
   text-align: center;
 }
-
+/*  correct/wrong stlye (border is controled in js) */
 #result {
   color: grey;
-  margin-left: 15.3vw;
+  font-size: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  margin-left: 75px;
 }
+/* all buttons and li(in quiz) style */
 .btn {
   color: white;
   font-size: 16px;
   background-color: darkblue;
   padding: 10px 10px;
-  margin: 0px 5px 10px 5px;
+  margin: 0px 15px 10px 0px;
   border-radius: 7px;
 }
 .btn:hover {
   background-color: #eab0ff;
 }
-
+/* posible answers style */
 #Ol {
   list-style-type: none;
 }
@@ -51,27 +59,39 @@
   font-size: 16px;
   font-family: Georgia, "Times New Roman", Times, serif;
 }
+/* submit initails styling */
 #form::before {
   content: "Enter your initials : ";
 }
-.high {
+#formButton {
+  padding: 3px 10px;
+}
+/* highscore page stlye */
+.high-header {
   margin-bottom: 25px;
   text-align: center;
 }
+.highscore-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10vh;
+}
+/* highscore list style */
 .order {
   margin-top: 10px;
   list-style: none;
 }
 .order li {
-  background-color: lightgray;
-  width: 55vw;
+  background-color: rgb(115, 155, 180);
+  width: 100%;
+  font-size: 16px;
+  font-family: Arial, Helvetica, sans-serif;
   text-align: left;
   margin-bottom: 10px;
-  padding-left: 10px;
+  padding: 5px 15px;
 }
-#formButton {
-  padding: 3px 10px;
-}
+
+/*  high score buttons*/
 .buttons {
   display: flex;
 }
