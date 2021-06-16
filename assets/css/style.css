@@ -12,7 +12,7 @@
 .header-container {
   display: flex;
   justify-content: space-around;
-  margin: 15px 15px;
+  margin: 40px 15px;
 }
 /* highscore link */
 #high {
@@ -24,7 +24,7 @@
 /* quiz container */
 .quiz {
   display: flex;
-  margin: 10vh 20px 10px 20px;
+  margin: 8vh 20px 10px 20px;
   align-items: center;
   flex-direction: column;
 }

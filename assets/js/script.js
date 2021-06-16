@@ -10,88 +10,100 @@ let testScores = [];
 let testResult = false;
 
 const questions = [
-  "Commonly used data types DO NOT include:",
-  "The condition in an if/else statement is enclose with ________",
-  "Arrays in JavaScript can be used to store ________.",
-  "String values must be enclosed within ______ when being assigned to variables",
-  "A very useful tool used during development and debugging for printing content to the debugger is :",
-  "Inside which HTML element do we put JavaScript",
-  "What is the correct JavaScript syntax to change the content of the HTML element?",
-  "How do you write 'Hello World' in an alert box?",
-  "How to write an IF statement in JavaScript?",
-  "How to write an IF statement for executing some code if 'i' is NOT equal to 5?",
-];
-
-let answers = [
-  [
-    ["strings", "wrong"],
-    ["booleans", "wrong"],
-    ["numbers", "wrong"],
-    ["alerts", "right"],
-  ],
-  [
-    ["quotes", "wrong"],
-    ["curly brackets", "wrong"],
-    ["square brackets", "wrong"],
-    ["parentheseis", "right"],
-  ],
-  [
-    ["numbers and strings", "wrong"],
-    ["other arrays", "wrong"],
-    ["boolenas", "wrong"],
-    ["all of the above", "right"],
-  ],
-
-  [
-    ["scripting", "wrong"],
-    ["script", "right"],
-    ["javascript", "wrong"],
-    ["js", "wrong"],
-  ],
-  [
-    ["commas", "wrong"],
-    ["curly brackets", "wrong"],
-    ["parenthesis", "wrong"],
-    ["quotes", "right"],
-  ],
-  [
-    ["JavaScript", "wrong"],
-    ["terminal/bash", "wrong"],
-    ["for loops", "wrong"],
-    ["console.log", "right"],
-  ],
-
-  //from w3schools quiz https://www.w3schools.com/js/js_quiz.asp
-  [
-    ["scripting", "wrong"],
-    ["script", "right"],
-    ["javascript", "wrong"],
-    ["js", "wrong"],
-  ],
-  [
-    [`document.getElementById('demo').innetHTML='Hello World';`, "right"],
-    [`document.getElementByName('p').innerHTML='Hello World!';`, "wrong"],
-    [`#demo.innerHTML='Hello World!';`, "wrong"],
-    [`document.getElement('p').innerHTML='Hello World!';`, "wrong"],
-  ],
-  [
-    [`alertBox('Hello World');`, "wrong"],
-    [`alert('Hello World');`, "right"],
-    [`msg('Hello World');`, "wrong"],
-    [`msgBox('Hello World');`, "wrong"],
-  ],
-  [
-    ["if(i==5)", "right"],
-    ["if i = 5 then", "wrong"],
-    ["if i = 5", "wrong"],
-    ["if i == 5 then", "wrong"],
-  ],
-  [
-    ["if i <> 5)", "wrong"],
-    ["if i =! 5 then", "wrong"],
-    ["if (i <> 5)", "wrong"],
-    ["if (i!=5)", "right"],
-  ],
+  {
+    question: "Commonly used data types DO NOT include:",
+    answer: [
+      ["strings", "wrong"],
+      ["booleans", "wrong"],
+      ["numbers", "wrong"],
+      ["alerts", "right"],
+    ],
+  },
+  {
+    question: "The condition in an if/else statement is enclose with ________",
+    answer: [
+      ["quotes", "wrong"],
+      ["curly brackets", "wrong"],
+      ["square brackets", "wrong"],
+      ["parentheseis", "right"],
+    ],
+  },
+  {
+    question: "Arrays in JavaScript can be used to store ________.",
+    answer: [
+      ["numbers and strings", "wrong"],
+      ["other arrays", "wrong"],
+      ["boolenas", "wrong"],
+      ["all of the above", "right"],
+    ],
+  },
+  {
+    question:
+      "String values must be enclosed within ______ when being assigned to variables",
+    answer: [
+      ["commas", "wrong"],
+      ["curly brackets", "wrong"],
+      ["parenthesis", "wrong"],
+      ["quotes", "right"],
+    ],
+  },
+  {
+    question:
+      "A very useful tool used during development and debugging for printing content to the debugger is :",
+    answer: [
+      ["JavaScript", "wrong"],
+      ["terminal/bash", "wrong"],
+      ["for loops", "wrong"],
+      ["console.log", "right"],
+    ],
+  },
+  {
+    question: "Inside which HTML element do we put JavaScript",
+    answer: [
+      ["scripting", "wrong"],
+      ["script", "right"],
+      ["javascript", "wrong"],
+      ["js", "wrong"],
+    ],
+  },
+  {
+    question:
+      "What is the correct JavaScript syntax to change the content of the HTML element?",
+    answer: [
+      [`document.getElementById('demo').innetHTML='Hello World';`, "right"],
+      [`document.getElementByName('p').innerHTML='Hello World!';`, "wrong"],
+      [`#demo.innerHTML='Hello World!';`, "wrong"],
+      [`document.getElement('p').innerHTML='Hello World!';`, "wrong"],
+    ],
+  },
+  {
+    question: "How do you write 'Hello World' in an alert box?",
+    answer: [
+      [`alertBox('Hello World');`, "wrong"],
+      [`alert('Hello World');`, "right"],
+      [`msg('Hello World');`, "wrong"],
+      [`msgBox('Hello World');`, "wrong"],
+    ],
+  },
+  {
+    question: "How to write an IF statement in JavaScript?",
+    answer: [
+      ["if(i==5)", "right"],
+      ["if i = 5 then", "wrong"],
+      ["if i = 5", "wrong"],
+      ["if i == 5 then", "wrong"],
+    ],
+  },
+  {
+    question:
+      "How to write an IF statement for executing some code if 'i' is NOT equal to 5?",
+    answer: [
+      ["if i <> 5)", "wrong"],
+      ["if i =! 5 then", "wrong"],
+      ["if (i <> 5)", "wrong"],
+      ["if (i!=5)", "right"],
+    ],
+  },
 ];
 
 function timerScore() {
@@ -116,18 +128,18 @@ function timerScore() {
 
 function startQuiz() {
   //randomize answer order
-  for (var i = 0; i < answers.length; i++) {
+  for (var i = 0; i < questions.length; i++) {
     if (i == 2) {
       //skip  question 3: the answer is all of the above...
       i++;
     }
-    k = answers[i].length;
+    k = questions[i].answer.length;
     while (k--) {
-      j = Math.floor(Math.random() * answers[i].length);
-      tempk = answers[i][k];
-      tempj = answers[i][j];
-      answers[i][k] = tempj;
-      answers[i][j] = tempk;
+      j = Math.floor(Math.random() * questions[i].answer.length);
+      tempk = questions[i].answer[k];
+      tempj = questions[i].answer[j];
+      questions[i].answer[k] = tempj;
+      questions[i].answer[j] = tempk;
     }
   }
   //hide unused elements
@@ -137,9 +149,9 @@ function startQuiz() {
   //start the timer/score
   timerScore();
   //display the question
-  headline.innerHTML = questions[index];
+  headline.innerHTML = questions[index].question;
   headline.style.textAlign = "left";
-  quiz.style.margin = "10vh 70px 10px 70px";
+  quiz.style.margin = "8vh 70px 10px 70px";
   //display the possible answers
   createAnswers();
   //increase counter
@@ -156,12 +168,14 @@ function createAnswers() {
   quiz.appendChild(x);
 
   // fill the list from ansewrs array
-  for (i = 0; i < answers[0].length; i++) {
+  for (i = 0; i < questions[0].answer.length; i++) {
     const li = document.createElement("li");
     li.setAttribute("id", `li${i}`);
     li.setAttribute("class", "btn");
     //fill the li with a answer
-    let text = document.createTextNode(`${i + 1}. ${answers[0][i][0]}`);
+    let text = document.createTextNode(
+      `${i + 1}. ${questions[0].answer[i][0]}`
+    );
     li.appendChild(text);
     document.getElementById("Ol").appendChild(li);
   }
@@ -196,15 +210,23 @@ function nextquestion(li) {
   //add result of last question
   setResult(li);
   //exit if questions are done
-  if (index > answers.length - 1) {
+  if (index > questions.length - 1) {
     exit();
   } else {
     //display new question and possible anwsers
-    headline.innerHTML = questions[index];
-    document.getElementById("li0").innerHTML = `1. ${answers[index][0][0]}`;
-    document.getElementById("li1").innerHTML = `2. ${answers[index][1][0]}`;
-    document.getElementById("li2").innerHTML = `3. ${answers[index][2][0]}`;
-    document.getElementById("li3").innerHTML = `4. ${answers[index][3][0]}`;
+    headline.innerHTML = questions[index].question;
+    document.getElementById(
+      "li0"
+    ).innerHTML = `1. ${questions[index].answer[0][0]}`;
+    document.getElementById(
+      "li1"
+    ).innerHTML = `2. ${questions[index].answer[1][0]}`;
+    document.getElementById(
+      "li2"
+    ).innerHTML = `3. ${questions[index].answer[2][0]}`;
+    document.getElementById(
+      "li3"
+    ).innerHTML = `4. ${questions[index].answer[3][0]}`;
   }
   //increse counter
   index++;
@@ -213,7 +235,7 @@ function nextquestion(li) {
 function setResult(li) {
   quiz.style.borderBottom = "solid grey 1px";
   document.getElementById("result").style.display = "block";
-  if (answers[index - 1][li][1] === "right") {
+  if (questions[index - 1].answer[li][1] === "right") {
     document.getElementById("result").innerHTML = "Correct!";
   } else {
     document.getElementById("result").innerHTML = "Wrong ;(";
@@ -321,7 +343,7 @@ function newpage() {
 
 //play right/wrong soundfx
 function play(li) {
-  if (answers[index - 1][li][1] === "right") {
+  if (questions[index - 1].answer[li][1] === "right") {
     var audio = new Audio("./assets/sounds/correct.mp3");
     audio.play();
   } else {
