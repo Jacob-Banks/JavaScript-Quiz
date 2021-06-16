@@ -78,7 +78,7 @@
 }
 /* highscore list style */
 .order {
-  margin-top: 10px;
+  margin: 10px 10px 0 10px;
   list-style: none;
 }
 .order li {
@@ -94,4 +94,5 @@
 /*  high score buttons*/
 .buttons {
   display: flex;
+  justify-content: center;
 }
