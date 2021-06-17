@@ -2,7 +2,7 @@
  
 <h2>Description</h2>
  
-<p> A fun 10 question javascript review quiz. Only 100 seconds to answer, be warned you lose 10 seconds on a wrong answer. The answers' order is randomized. A sound fx lets you know whether you were corrected or not.   A highscore page is available, can you make it?</p>
+<p> A fun 10 question javascript review quiz. Only 100 seconds to answer, be warned you lose 10 seconds on a wrong answer. The answers' order is randomized. A sound fx lets you know whether you were correct or not.   A highscore page is available, can you make it?</p>
  
 <h3>Screenshot</h3>
 
